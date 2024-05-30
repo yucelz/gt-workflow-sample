@@ -2,8 +2,8 @@ name: release
 
 on:
   push:
-    branches:
-      - release
+    tags:
+      - "*"
 
 jobs:
   release:
@@ -35,3 +35,7 @@ jobs:
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish release
+        uses: ghalactic/github-release-from-tag@v5
