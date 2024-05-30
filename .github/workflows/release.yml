@@ -35,12 +35,3 @@ jobs:
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      -name: Publish release
-        uses: ghalactic/github-release-from-tag@v5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ github.ref }}
-          runs-on: ubuntu-latest
-      dry_run: false
-      if: github.ref == 'refs/heads/release' 
