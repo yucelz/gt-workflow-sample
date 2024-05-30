@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - release
+    tags:
+      - "*"
 
 jobs:
   release:
@@ -31,7 +33,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish package distributions to GitHub Releases
-        uses: python-semantic-release/upload-to-gh-release@main
+        uses: python-semantic-release/upload-to-gh-releases@v1.2.1
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish release
+        uses: ghalactic/github-release-from-tag@v5
