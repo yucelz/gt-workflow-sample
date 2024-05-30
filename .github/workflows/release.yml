@@ -12,6 +12,7 @@ jobs:
     permissions:
       id-token: write
 
+    # Define job steps
     steps:
       - name: Set up Python
         uses: actions/setup-python@v5
